@@ -1,0 +1,12 @@
+git clone https://github.com/YOUR_USERNAME/REPOSITORY_NAME.git
+cd REPOSITORY_NAME
+virtualenv env --python=python3.8
+source env/bin/activate
+pip install -r requirements.txt
+export FLASK_APP=core/server.py
+rm core/store.sqlite3  # This deletes the existing database
+flask db upgrade -d core/migrations/  # Apply database migrations
+bash run.sh
+pytest -vvv -s tests/
+pytest --cov
+open htmlcov/index.html  # or use 'xdg-open' on Linux
